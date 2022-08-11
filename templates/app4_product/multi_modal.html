@@ -1,0 +1,17 @@
+<!-- Delete Product-->
+<div class="modal fade" id="product_delete{{product.id}}" tabindex="-1" role="dialog" aria-labelledby="modal-achievement" aria-hidden="true">
+    <div class="modal-dialog modal-tertiary modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <button type="button" class="btn-close theme-settings-close fs-6 ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header mx-auto">
+                <p class="lead mb-0 text-white">Confirm for Delete</p>
+            </div>
+            <div class="modal-body pt-0">
+            </div>
+            <div class="modal-footer d-flex justify-content-center pt-0 pb-3">
+                <a href="{% url 'app4_product:product_delete' product.id %}"><button type="button"  class="btn btn-sm btn-success text-tertiary">Delete</button></a>
+                <button type="button" data-bs-dismiss="modal" aria-label="Close" class="btn btn-sm btn-danger text-tertiary">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

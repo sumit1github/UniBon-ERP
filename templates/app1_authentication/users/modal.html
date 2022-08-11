@@ -1,0 +1,75 @@
+<!-- modal for active and inactive user-->
+<div class="modal fade" id="active_inactive{{user.id}}" tabindex="-1" role="dialog" aria-labelledby="modal-achievement" aria-hidden="true">
+    <div class="modal-dialog modal-tertiary modal-dialog-centered" role="document">
+        <div class="modal-content"><button type="button" class="btn-close theme-settings-close fs-6 ms-auto"
+                data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header mx-auto">
+                <p class="lead mb-0 text-white">Select Option</p>
+            </div>
+            <div class="modal-body pt-0">
+            </div>
+            <div class="modal-footer d-flex justify-content-center pt-0 pb-3">
+                <a href="{% url 'app1_authentication:user_state_chage' user.id 'active'%}"><button type="button"  class="btn btn-sm btn-success text-tertiary">Active</button></a>
+                <a href="{% url 'app1_authentication:user_state_chage' user.id 'inactive'%}"><<button type="button"  class="btn btn-sm btn-danger text-tertiary">Inactive</button></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal for permission add-->
+<div class="modal fade" id="permission{{user.id}}" tabindex="-1" role="dialog" aria-labelledby="modal-form"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <div class="modal-body p-0">
+        <div class="card p-3 p-lg-4"><button type="button" class="btn-close ms-auto"
+            data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="text-center text-md-center mb-4 mt-md-0">
+            <h1 class="mb-0 h4">Manage permission</h1>
+            <small>ctl+click to select more than one</small>
+        </div>
+        <form action="{% url "app1_authentication:user_permission_add" user.id %}" method="POST" class="mt-4">
+            {% csrf_token %}
+            <select class="form-select" name="permission" aria-label="Default select example">
+            <option selected>Access</option>
+            <option value="accounts">accounts</option>
+            <option value="product">product</option>
+            </select>
+            <br>
+            <div class="d-grid">
+            <button type="submit" class="btn btn-gray-800">Add</button>
+            </div>
+        </form>
+        
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+
+<!-- modal for password change-->
+<div class="modal fade" id="password_change{{user.id}}" tabindex="-1" role="dialog" aria-labelledby="modal-form"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+    <div class="modal-body p-0">
+        <div class="card p-3 p-lg-4"><button type="button" class="btn-close ms-auto"
+            data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="text-center text-md-center mb-4 mt-md-0">
+            <h1 class="mb-0 h4">Change Password</h1>
+            <small>Enter a Strong Password</small>
+        </div>
+        <form action="{% url "app1_authentication:password_change" user.id %}" method="POST" class="mt-4">
+            {% csrf_token %}
+            <input class="form-control" name="password" placeholder="Enter Password" type="text" required/>
+            <br>
+            <div class="d-grid">
+            <button type="submit" class="btn btn-gray-800">Update</button>
+            </div>
+        </form>
+        
+        </div>
+    </div>
+    </div>
+</div>
+</div>

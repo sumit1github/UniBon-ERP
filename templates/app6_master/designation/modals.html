@@ -1,0 +1,28 @@
+<div class="modal fade" id="create" tabindex="-1" role="dialog"
+    aria-labelledby="modal-form-signup" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-content">
+        <div class="modal-body p-0">
+        <div class="card p-3 p-lg-4"><button type="button" class="btn-close ms-auto"
+            data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="text-center text-md-center mb-4 mt-md-0">
+            <h1 class="mb-0 h4">Add Designation</h1>
+            </div>
+            <form action="{% url 'app6_master:designation' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.media}}
+                <div>
+                    {{form.as_p}}
+                    <input name="operation" value="create_new" hidden/>
+                </div>
+               
+            <div class="d-grid">
+                <button type="submit" class="btn btn-gray-800">Add Designation</button>
+            </div>
+            </form>
+        
+        </div>
+        </div>
+    </div>
+    </div>
+</div>

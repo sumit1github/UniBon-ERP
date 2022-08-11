@@ -1,0 +1,85 @@
+{% extends 'master/master.html' %}
+{% load static %}
+{% block content %}
+  <div class="py-4">
+
+    <div class="d-flex justify-content-between w-100 flex-wrap">
+      <div class="mb-3 mb-lg-0">
+        <h1 class="h4">All User List</h1>
+        
+      </div>
+      <div>
+        
+
+        <a data-bs-toggle="modal" data-bs-target="#modal-form-signup"
+          class="btn btn-outline-gray-600 d-inline-flex align-items-center">
+          <i class="bi bi-plus-circle-dotted" style="color:red;"></i>  Add Employee
+        </a>
+      </div>
+      
+    </div>
+  </div>
+  {% include 'snippets/alert.html'%}
+  <div class="card border-0 shadow">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-centered table-nowrap mb-0 rounded">
+          <thead class="thead-light">
+            <tr>
+              <th class="border-0 rounded-start">ID</th>
+              <th class="border-0">Name</th>
+              <th class="border-0">Contact</th>
+              <th class="border-0">Designation</th>
+              <th class="border-0">Status</th>
+              <th class="border-0">Settings</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            {% for e in employee_list %}
+              <tr>
+                <td class="border-0 fw-bold">{{e.id}}</td>
+                <td class="border-0 fw-bold">{{e.name}}</td>
+                <td class="border-0 fw-bold">{{e.contact1}}</td>
+                <td class="border-0 fw-bold">{{e.designation}}</td>
+                <td class="border-0 fw-bold">
+                  {% if user.is_active == True %}
+                    <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#active_inactive{{user.id}}">Active</button>
+                  {% else %}
+                    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#active_inactive{{user.id}}">Inactive</button>
+                  {% endif %}
+                </td>
+                <td class="border-0 fw-bold">
+                  <a href="{% url 'app3_employee_management:edit_employee' e.id %}"><i class="bi bi-gear" title="Edit Employee" style="font-size: 22px;color: #03035a;"></i></a>
+                  <i class="bi bi-trash" title="Employee Delete" style="font-size: 25px;color: orangered;" data-bs-toggle="modal" data-bs-target="#employee_delete{{user.id}}"></i>
+                  <a href="{% url 'app3_employee_management:employee_documents' e.id %}"><i title="Documents" class="bi bi-file-zip" style="font-size: 23px;color: #b816cc;"></i></a>
+                </td>
+              </tr>
+              {% include 'app3_employee_management/multi_modal.html'%}
+            {% endfor %}
+            
+          </tbody>
+        </table>
+        <div class="pagination" style="float: right;">
+            <span class="step-links">
+                {% if employee_list.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ employee_list.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ employee_list.number }} of {{ employee_list.paginator.num_pages }}.
+                </span>
+
+                {% if employee_list.has_next %}
+                    <a href="?page={{ employee_list.next_page_number }}">next</a>
+                    <a href="?page={{ employee_list.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+      </div>
+    </div>
+  </div>  
+  {% include 'app3_employee_management/modal.html'%}
+
+{% endblock content %}
