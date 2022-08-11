@@ -1,0 +1,82 @@
+{% extends 'master/master.html' %}
+{% load static %}
+{% block content %}
+  <div class="py-4">
+
+    <div class="d-flex justify-content-between w-100 flex-wrap">
+      <div class="mb-3 mb-lg-0">
+        <h1 class="h4">All Prouct List</h1>
+        
+      </div>
+      <div>
+        
+
+        <a data-bs-toggle="modal" data-bs-target="#product_creation"
+          class="btn btn-outline-gray-600 d-inline-flex align-items-center">
+          <i class="bi bi-plus-circle-dotted" style="color:red;"></i>  Add Product
+        </a>
+      </div>
+      
+    </div>
+  </div>
+  {% include 'snippets/alert.html'%}
+  <div class="card border-0 shadow">
+    <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-centered table-nowrap mb-0 rounded">
+          <thead class="thead-light">
+            <tr>
+              <!--th class="border-0 rounded-start">id</th-->
+              <th class="border-0 rounded-start" style="text-transform: none;font-size: 18px;">Item Code</th>
+              <th class="border-0" style="text-transform: none;font-size: 18px;">Item</th>
+              <th class="border-0" style="text-transform: none;font-size: 18px;">Item Code</th>
+              <th class="border-0" style="text-transform: none;font-size: 18px;">Unit</th>
+              <th class="border-0" style="text-transform: none;font-size: 18px;">Remarks</th>
+              <th class="border-0" style="text-transform: none;font-size: 18px;">Settings</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for product in product_list %}
+              <tr>
+                <!--td class="border-0 fw-bold">{{product.id}}</td-->
+                <td class="border-0 fw-bold">{{product.sku_start}}{{product.id}}</td>
+                <td class="border-0 fw-bold">{{product.name}}</td>
+                <td class="border-0 fw-bold">{{product.unit}}</td>
+                <td class="border-0 fw-bold">{{product.Item_code}}</td>
+                <td class="border-0 fw-bold">{{product.remarks}}</td>
+                
+                <td class="border-0 fw-bold">
+                  <a href="{% url 'app4_product:product_update' product.id %}"><i class="bi bi-pencil-square" title="Edit Product" style="font-size: 22px;color: #fb9d38;"></i></a>
+                  <a ><i data-bs-toggle="modal" data-bs-target="#product_delete{{product.id}}" class="bi bi-trash" title="Delet Product" style="font-size: 22px;color: #ec1f0d;"></i></a>
+                  <a ><i class="bi bi-gear" title="Edit Employee" style="font-size: 22px;color: #03035a;"></i></a>
+                  <a ><i title="Documents" class="bi bi-file-zip" style="font-size: 23px;color: #b816cc;"></i></a>
+                </td>
+              </tr>
+              {% include 'app4_product/multi_modal.html'%}
+            {% endfor %}
+            
+          </tbody>
+        </table>
+        <div class="pagination" style="float: right;">
+            <span class="step-links">
+                {% if product_list.has_previous %}
+                    <a href="?page=1">&laquo; first</a>
+                    <a href="?page={{ product_list.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ product_list.number }} of {{ product_list.paginator.num_pages }}.
+                </span>
+
+                {% if product_list.has_next %}
+                    <a href="?page={{ product_list.next_page_number }}">next</a>
+                    <a href="?page={{ product_list.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+      </div>
+    </div>
+  </div>  
+  {% include 'app4_product/modal.html'%}
+
+{% endblock content %}

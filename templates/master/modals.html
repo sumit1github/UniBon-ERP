@@ -1,0 +1,48 @@
+{% load static %}
+<!--settings-->
+<div class="modal fade" id="logout_modal" tabindex="-1" role="dialog" aria-labelledby="modal-achievement"
+    aria-hidden="true">
+    <div class="modal-dialog modal-tertiary modal-dialog-centered" role="document">
+        <div class="modal-content"><button type="button" class="btn-close theme-settings-close fs-6 ms-auto"
+                data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header mx-auto">
+                <p class="lead mb-0 text-white">Select Option</p>
+            </div>
+            <div class="modal-body pt-0">
+            </div>
+            <div class="modal-footer d-flex justify-content-center pt-0 pb-3">
+                <a href="{% url 'app1_authentication:logout' %}"><i class="bi bi-x-circle">Logout</i></a>
+                <button type="button" class="btn btn-sm btn-white text-tertiary" data-bs-dismiss="modal">New Password</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- raw merials-->
+<div class="modal fade" id="raw_metrials" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Select Option</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+    <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-4 col-4">
+                    <i class="bi bi-c-square" style="color: DARKRED;"> Copper</i>
+                    
+                </div>
+                <div class="col-md-4 col-4">
+                    <i class="bi bi-circle" style="color: rgb(34 68 5);"> PVC  </i>
+                </div>
+                <div class="col-md-4 col-4">
+                    <i class="bi bi-c-square" style="color: DARKRED;"> Copper</i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+  </div>
+</div>

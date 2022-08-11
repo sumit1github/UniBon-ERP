@@ -1,0 +1,23 @@
+{% comment %} {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert {{ message.tags}}" style="text-align: center;border-radius: 12px;height: 52px;" >
+            
+            {{ message}}
+        </div>
+        {% endfor %}
+    </ul>
+{% endif %} {% endcomment %}
+
+{% if messages %}
+    
+        {% for message in messages %}
+        <div style="text-align:justify;" class="alert {{message.tags}}" role="alert">
+            
+            <p>{{message}}.</p>
+            
+        </div>
+                    
+        {% endfor %}
+  
+{% endif %}

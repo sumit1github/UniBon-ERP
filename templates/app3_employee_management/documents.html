@@ -1,0 +1,80 @@
+{% extends 'master/master.html' %}
+{% load static %}
+{% block content %}
+  <div class="py-4">
+
+    <div class="d-flex justify-content-between w-100 flex-wrap">
+      <div class="mb-3 mb-lg-0">
+        <h1 class="h4">Add Employee</h1>
+        
+      </div>
+      <div>
+        
+      </div>
+      
+    </div>
+  </div>
+  <div class="card border-0 shadow">
+    <div class="">
+    <div class="row">
+      <div class="col-12 mb-4">
+        <div class="card border-0 shadow components-section">
+          <div class="card-body">
+            <div class="row mb-4">
+              <div class="col-lg-4 col-sm-6">
+                <!--empty-->
+              </div>
+              <div class="col-lg-4 col-sm-6" style='text-align:center;'>
+                
+              <table class="table table-centered table-nowrap mb-0 rounded">
+                <thead class="thead-light">
+                  <tr>
+                    <th class="border-0">Name</th>
+                    <th class="border-0">Image</th>
+                    <th class="border-0">Action</th>
+                    
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for doc in doc_list %}
+                    <tr>
+                      <td class="border-0 fw-bold">{{doc.name}}</td>
+                      <td class="border-0 fw-bold">
+                        {% if doc.file_data %}
+                          <a target="_blank" href="{{doc.file_data.url}}">Click TO See</a>
+                        {% endif %}
+                      </td>
+                      <td class="border-0 fw-bold">
+                        <a href="{% url 'app3_employee_management:employee_document_delete' doc.id %}"><i class="bi bi-trash" title="Document Delete" style="font-size: 13px;color: orangered;"></i></a>
+                        
+                      </td>
+                    </tr>
+                    
+                  {% endfor %}
+                  
+                </tbody>
+              </table>
+
+              <hr>
+                {% include 'snippets/alert.html' %}
+                <form method="POST" action="" enctype="multipart/form-data">
+                  
+                  <br>
+                  {% csrf_token %}
+                  {{form.as_p}}
+                  <button typr="submit" class="btn btn-primary">Update Employee</button>
+                </form>
+              </div>
+              <div class="col-lg-4 col-sm-6">
+                <!--empty-->
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div>  
+{% endblock content %}
