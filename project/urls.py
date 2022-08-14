@@ -13,4 +13,5 @@ urlpatterns = [
     path('product_manage/',include('app4_product.urls')),
     path('raw_materials/',include('app5_raw_materials.urls')),
     path('master_data/',include('app6_master.urls')),
+    path('rms/',include('app7_rms.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,22 +1,23 @@
-<div class="modal fade" id="product_creation" tabindex="-1" role="dialog"
+<div class="modal fade" id="create_sms" tabindex="-1" role="dialog"
     aria-labelledby="modal-form-signup" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-body p-0">
         <div class="card p-3 p-lg-4"><button type="button" class="btn-close ms-auto"
             data-bs-dismiss="modal" aria-label="Close"></button>
             <div class="text-center text-md-center mb-4 mt-md-0">
-            <h1 class="mb-0 h4">Add Product</h1>
+            <h1 class="mb-0 h4">Add Message</h1>
             </div>
-            <form action="{% url 'app4_product:product_list_create' %}" method="POST" enctype="multipart/form-data">
+            <form action="{% url 'app7_rms:rms_list_or_create' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form.media}}
                 <div>
                     {{form.as_p}}
+                    <input type="text" name="coming_from" value="erp" hidden/>
                 </div>
                
             <div class="d-grid">
-                <button type="submit" class="btn btn-gray-800">Add Product</button>
+                <button type="submit" class="btn btn-gray-800">Add Unit</button>
             </div>
             </form>
         
@@ -26,28 +27,27 @@
     </div>
 </div>
 
-<!-- Search Product-->
-<div class="modal fade" id="search_product" tabindex="-1" role="dialog"
+<!-- Date wise filter-->
+<div class="modal fade" id="date_filter" tabindex="-1" role="dialog"
     aria-labelledby="modal-form-signup" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
     <div class="modal-content">
         <div class="modal-body p-0">
         <div class="card p-3 p-lg-4"><button type="button" class="btn-close ms-auto"
             data-bs-dismiss="modal" aria-label="Close"></button>
             <div class="text-center text-md-center mb-4 mt-md-0">
-            <h1 class="mb-0 h4">Search Product</h1>
-            <small class="mb-0" style="color: red;">Using Id, name</small>
+            <h1 class="mb-0 h4">Select Date Range</h1>
             </div>
-            <form action="{% url 'app4_product:search_product' %}" method="POST" enctype="multipart/form-data">
+            <form action="{% url 'app7_rms:rms_list_or_create' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form.media}}
                 <div>
-                    <input type="text" name="query" class="form-control" placeholder="Item Code or name" required/>
+                    {{form.as_p}}
+                    <input type="text" name="coming_from" value="erp" hidden/>
                 </div>
-                <br>
                
             <div class="d-grid">
-                <button type="submit" class="btn btn-gray-800">Search</button>
+                <button type="submit" class="btn btn-gray-800">Add Unit</button>
             </div>
             </form>
         

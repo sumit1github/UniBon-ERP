@@ -17,21 +17,4 @@
 </div>
 
 <!---->
-<!-- modal for active and inactive employee-->
-<div class="modal fade" id="active_inactive{{user.id}}" tabindex="-1" role="dialog" aria-labelledby="modal-achievement" aria-hidden="true">
-    <div class="modal-dialog modal-tertiary modal-dialog-centered" role="document">
-        <div class="modal-content"><button type="button" class="btn-close theme-settings-close fs-6 ms-auto"
-                data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="modal-header mx-auto">
-                <p class="lead mb-0 text-white">Select Option</p>
-            </div>
-            <div class="modal-body pt-0">
-            </div>
-            <div class="modal-footer d-flex justify-content-center pt-0 pb-3">
-                <a href="{% url 'app1_authentication:user_state_chage' user.id 'active'%}"><button type="button"  class="btn btn-sm btn-success text-tertiary">Active</button></a>
-                <a href="{% url 'app1_authentication:user_state_chage' user.id 'inactive'%}"><button type="button"  class="btn btn-sm btn-danger text-tertiary">Inactive</button></a>
-            </div>
-        </div>
-    </div>
-</div>
 
