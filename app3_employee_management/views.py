@@ -11,7 +11,7 @@ from helpers.decorators import super_admin_only, login_required, employee_edit_p
 from helpers.pagination import paginate
 import os
 import json
-
+from django.db.models import Q
 app="app3_employee_management/" 
 # Create your views here.
 
@@ -23,10 +23,9 @@ class EmployeeAdd(View):
     model=Employee
     html=app+"employee_list.html"
     def get(self,request,*args,**kwargs):
-        data_list=self.model.objects.all().order_by('-id')
+        data_list=self.model.objects.filter(is_active=True).order_by('-id')
         employee_list=paginate(request,data_list, 50)
-        designation_list=Designation.objects.all()
-        context={'form':self.form,'employee_list':employee_list,'designation_list':designation_list}
+        context={'form':self.form,'employee_list':employee_list}
         return render(request,self.html,context)   
 
     def post(self,request,*args,**kwargs):
@@ -141,3 +140,48 @@ class EmployeeDocumentsDelete(View):
         obj.delete()
         messages.success(request,"Document is deleted.")
         return redirect('app3_employee_management:employee_documents',u_id) 
+
+
+@method_decorator(login_required,name='dispatch')
+@method_decorator(employee_edit_permission,name='dispatch')
+
+class EmployeeSearchView(View):
+    form=EmployeeCreationForm
+    model=Employee
+    template=app+"employee_list.html"
+    def post(self,request,*args,**kwargs):
+        query=request.POST.get('query')
+        e_id=request.POST.get('e_id')
+        employee_list=[]
+        employee_list1=[]
+        employee_list2=[]
+        if e_id:
+            employee_list=self.model.objects.filter(id=e_id)
+        else:
+            employee_list=self.model.objects.filter(Q(name__icontains=query) | Q(contact1__iexact=query) | Q(contact2__iexact=query))
+        
+        context={'form':self.form,'employee_list':employee_list,}   
+        return render(request, self.template, context)
+    
+    def get(self,request,*args,**kwargs):
+        return redirect('app3_employee_management:add_employee')
+
+@method_decorator(login_required,name='dispatch')
+@method_decorator(employee_edit_permission,name='dispatch')
+
+class EmployeeFilterView(View):
+    form=EmployeeCreationForm
+    model=Employee
+    template=app+"employee_list.html"
+    def get(self,request,*args,**kwargs):
+        filter_name=kwargs.get('filter_name')
+        employee_list=[]
+        if filter_name=='active':
+            employee_list=self.model.objects.filter(is_active=True)
+        elif filter_name=='inactive':
+            employee_list=self.model.objects.filter(is_active=False)
+        else:
+            messages.error(request, "Use a Vaild Filter")
+        employee_list=paginate(request,employee_list, 50)
+        context={'form':self.form,'employee_list':employee_list,}   
+        return render(request, self.template, context)

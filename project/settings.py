@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     #packages
     'rest_framework',
+    'ckeditor',
     #applications
     'app1_authentication',
     'app2_admin_dashboard',
@@ -30,6 +31,7 @@ INSTALLED_APPS = [
     'app4_product',
     'app5_raw_materials',
     'app6_master',
+    'app7_rms',
 ]
 
 AUTH_USER_MODEL = "app1_authentication.User"

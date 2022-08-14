@@ -84,25 +84,30 @@ class ProductdelteView(View):
 
 @method_decorator(login_required,name='dispatch')
 @method_decorator(product_edit_permission,name='dispatch')
+
 class ProductsearchView(View):
     model=Product
     form=ProductCreationForm
     template=app+"product_list.html"
     def post(self,request,*args,**kwargs):
         query=request.POST.get('query')
-        product1=[]
-        product2=[]
-        product3=[]
+        product=[]
         try:
             id=int(query)
             product=self.model.objects.filter(id=id).first()
-            context={'product_list':product,'form':self.form}
-            return render(request, self.tempalte, context)
+
         except:
-            product1=self.model.objects.filter(id=id).first()
-            product.delete()
-            messages.success(request, "Product is deleted.")
-        return redirect('app4_product:product_list_create')
+            product=self.model.objects.filter(name__icontains=query)
+
+        if product != []:
+            context={'product_list':product,'form':self.form}
+
+        else:
+            context={'product_list':product,'form':self.form}
+            messages.error(request,"Product Not Found.")
+
+        return render(request, self.template, context)
+
         
     #     eid = int(eid)
     #     emp2 = Employee.objects.filter(id=eid)
